@@ -62,6 +62,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-SpringBoot整合Redis引发的血案" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/SpringBoot整合Redis引发的血案/" class="article-date">
+  <time datetime="2019-06-20T08:59:09.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/SpringBoot整合Redis引发的血案/">SpringBoot整合Redis引发的血案</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SpringBoot整合Redis引发的血案"><a href="#SpringBoot整合Redis引发的血案" class="headerlink" title="SpringBoot整合Redis引发的血案"></a>SpringBoot整合Redis引发的血案</h1><hr>
+<h2 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h2><h3 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖"></a>1、引入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- ==============================整合redis================================= --&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-redis --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">		    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!--  用于Redis数据库的连接池 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.commons<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-pool2<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- ==============================整合redis================================= --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2、整合配置-application-properties-（PS：也可以使用配置类的方式使用，自行百度）"><a href="#2、整合配置-application-properties-（PS：也可以使用配置类的方式使用，自行百度）" class="headerlink" title="2、整合配置 application.properties （PS：也可以使用配置类的方式使用，自行百度）"></a>2、整合配置 application.properties （PS：也可以使用配置类的方式使用，自行百度）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># redis config</span><br><span class="line">#  data index (default value = 0)</span><br><span class="line">spring.redis.database=0</span><br><span class="line"># current redis host  , The official version is Linux</span><br><span class="line">spring.redis.host=localhost</span><br><span class="line"># redis port (default 6379)</span><br><span class="line">spring.redis.port=6379</span><br><span class="line"># redis password (default null)</span><br><span class="line">spring.redis.password=</span><br><span class="line"># redis max active (default 8)</span><br><span class="line">spring.redis.lettuce.pool.max-active=8</span><br><span class="line"># redis max wait time (default -1 not wait)</span><br><span class="line">spring.redis.lettuce.pool.max-wait=-1</span><br><span class="line">spring.redis.lettuce.pool.max-idle=8</span><br><span class="line">spring.redis.lettuce.pool.min-idle=0</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、开启Redis缓存，设置主键增长策略"><a href="#3、开启Redis缓存，设置主键增长策略" class="headerlink" title="3、开启Redis缓存，设置主键增长策略"></a>3、开启<strong>Redis</strong>缓存，设置主键增长策略</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.lang.reflect.Method;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.CachingConfigurerSupport;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.annotation.EnableCaching;</span><br><span class="line"><span class="keyword">import</span> org.springframework.cache.interceptor.KeyGenerator;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="comment">/***</span></span><br><span class="line"><span class="comment"> * 开启redis 缓存。设置主键增长策略</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> capiudor</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedisConfig</span> <span class="keyword">extends</span> <span class="title">CachingConfigurerSupport</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> KeyGenerator <span class="title">keyGenerator</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> KeyGenerator() &#123;</span><br><span class="line">			</span><br><span class="line">			<span class="meta">@Override</span></span><br><span class="line">			<span class="function"><span class="keyword">public</span> Object <span class="title">generate</span><span class="params">(Object target, Method method, Object... params)</span> </span>&#123;</span><br><span class="line">				<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">				StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">				sb.append(target.getClass().getName());</span><br><span class="line">				sb.append(method.getName());</span><br><span class="line">				<span class="keyword">for</span> (Object object : params) &#123;</span><br><span class="line">					sb.append(object.toString());</span><br><span class="line">				&#125;</span><br><span class="line">				<span class="keyword">return</span> sb.toString();</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、测试类"><a href="#4、测试类" class="headerlink" title="4、测试类"></a>4、测试类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> cache;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.redis.core.RedisTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"><span class="keyword">import</span> com.woniuxy.three.pms.demo.Springboot01Application;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>()</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CacheRedisTest</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Autowired</span></span><br><span class="line">	<span class="keyword">private</span> RedisTemplate redisTemplate;</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Test</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		redisTemplate.opsForValue().set(<span class="string">"keyname"</span>, <span class="string">"capiudor"</span>);</span><br><span class="line">		String value = (String) redisTemplate.opsForValue().get(<span class="string">"keyname"</span>);</span><br><span class="line">		System.out.println(value);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果能够在下方打印  <code>capiudor</code> 即可证明整合redis成功</p>
+<h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><hr>
+<h3 id="1、SpringBootTest启动"><a href="#1、SpringBootTest启动" class="headerlink" title="1、SpringBootTest启动"></a>1、SpringBootTest启动</h3><p><strong>报错信息</strong>：找不到</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">16:34:22.031 [main] DEBUG org.springframework.test.context.support.ActiveProfilesUtils - Could not find an 'annotation declaring class' for annotation type [org.springframework.test.context.ActiveProfiles] and class [cache.CacheRedisTest]</span><br></pre></td></tr></table></figure>
+
+<p>解决方案：在测试类的@SpringBootTest加参数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,classes = &#123;Application.class&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>起初我只加上了classes=Application.class，结果启动的时候，报了下面的错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Caused by: java.lang.IllegalStateException: javax.websocket.server.ServerContainer not available</span><br></pre></td></tr></table></figure>
+
+<p>原因就是因为这个没有启动容器，加载不到tomcat，有人说使用@WebMvcTest()注解来代替@SpringBootTest，对不起告辞！加载不到，我就使用配置环境，告诉这个SpringJunitTest使用的环境是web环境就有了如上配置</p>
+<h3 id="2、Redis无法使用set命令"><a href="#2、Redis无法使用set命令" class="headerlink" title="2、Redis无法使用set命令"></a>2、Redis无法使用set命令</h3><p><strong>报错信息</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">MISCONF Redis is configured to save RDB snapshots, but is currently not able to persist on disk. Commands that may modify the data set are disabled. Please check Redis logs <span class="keyword">for</span> details about the error.</span><br></pre></td></tr></table></figure>
+
+<p><strong>解决方案</strong>：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">config set stop-writes-on-bgsave-error no</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/20/SpringBoot整合Redis引发的血案/" data-id="cjx4fqiz80001boo3ux16dm3g" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-短信接口" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/20/短信接口/" class="article-date">
@@ -153,7 +218,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/20/短信接口/" data-id="cjx4a9bdo0001r0o3qf8fixl3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/20/短信接口/" data-id="cjx4fqizs0004boo39xufmj07" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMS/">SMS</a></li></ul>
@@ -204,7 +269,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/06/20/hello-world/" data-id="cjx4a9bcy0000r0o3qi4sp11p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/06/20/hello-world/" data-id="cjx4fqiz00000boo3mn1r8ebe" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +292,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMS/">SMS</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMS/">SMS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/">Spring Boot</a></li></ul>
     </div>
   </div>
 
@@ -237,7 +302,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/SMS/" style="font-size: 10px;">SMS</a>
+      <a href="/tags/SMS/" style="font-size: 10px;">SMS</a> <a href="/tags/Spring-Boot/" style="font-size: 10px;">Spring Boot</a>
     </div>
   </div>
 
@@ -257,6 +322,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/06/20/SpringBoot整合Redis引发的血案/">SpringBoot整合Redis引发的血案</a>
+          </li>
         
           <li>
             <a href="/2019/06/20/短信接口/">短信接口</a>
