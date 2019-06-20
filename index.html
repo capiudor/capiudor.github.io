@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:locale" content="default">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-短信接口" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/短信接口/" class="article-date">
+  <time datetime="2019-06-20T06:23:30.000Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/短信接口/">短信接口</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="短信设计"><a href="#短信设计" class="headerlink" title="短信设计"></a>短信设计</h1><p>1、是否需要考虑安全</p>
+<p>2、是否需要考虑回调</p>
+<p>3、是否需要考虑类型</p>
+<h2 id="短信通讯流程"><a href="#短信通讯流程" class="headerlink" title="短信通讯流程"></a>短信通讯流程</h2><hr>
+<p>前台接口通过调用接口发起短信通知接口，将信息组织为json 格式报文发往后台，后台处理报文数据，发往某短信提供方，厂商接收后实时返回短信发送状态。这是是厂商将短信内容发往相应的客户的手机，异步通知给我们平台，报告这次短信的发送最终状态。</p>
+<h2 id="短信厂商提供的接口"><a href="#短信厂商提供的接口" class="headerlink" title="短信厂商提供的接口"></a>短信厂商提供的接口</h2><hr>
+<p>短信下发接口（没有参数，静态的短信文字内容）</p>
+<p>变量短信接口（HTTPS请求方式，同时支持不同变量的短信内容）</p>
+<p>回送状态报告接口（即异步通知接口）</p>
+<h2 id="1、安全性"><a href="#1、安全性" class="headerlink" title="1、安全性"></a>1、安全性</h2><hr>
+<p>问题：倘若攻击者使用抓包工具，对我们的接口进行无限发送短信，造成的短信费用是斐然的。</p>
+<p>解决：</p>
+<ol>
+<li>前端验证码（避免频繁发送）</li>
+<li>黑名单（一个手机号超过一定次数拉入黑名单）</li>
+<li>IP封停（一个IP频繁发送短信，拒绝该IP的请求）</li>
+<li>提取Request中的信息，甄别是否为正常请求（头信息）</li>
+</ol>
+<h2 id="2、回调"><a href="#2、回调" class="headerlink" title="2、回调"></a>2、回调</h2><hr>
+<p>问题：这个回调不影响你发短信，因为回调是已经完成了发送短信的操作，我们是否需要记录这个发送成功或者失败的信息。也就是说这个回调函数仅仅只是一个记录日志的作用</p>
+<h2 id="3、类型"><a href="#3、类型" class="headerlink" title="3、类型"></a>3、类型</h2><hr>
+<p>短信我们拿来干什么？</p>
+<ol>
+<li>手机注册验证码</li>
+<li>手机登录验证码</li>
+<li>重要的操作验证码（比如密码找回）</li>
+<li>短信通知已处理的业务</li>
+</ol>
+<p>根据我们的需要来设计这个短信接口类型，根绝类型选择我们发送的模板以及参数（模板由我们自己设计，参数即是模板的变量）</p>
+<h2 id="SpringBoot-整合短信接口（秒嘀云服务商）"><a href="#SpringBoot-整合短信接口（秒嘀云服务商）" class="headerlink" title="SpringBoot 整合短信接口（秒嘀云服务商）"></a>SpringBoot 整合短信接口（秒嘀云服务商）</h2><hr>
+<h3 id="1、引入依赖"><a href="#1、引入依赖" class="headerlink" title="1、引入依赖"></a>1、引入依赖</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>commons-codec<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这个依赖是提供处理常用的编码方法的工具类：</p>
+<p>​    例如DES、SHA1、MD5、Base64，URL，Soundx等等。</p>
+<p><strong>不可逆算法</strong></p>
+<p><strong>1.MD5</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line">DigestUtils.md5Hex(str);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2.SHA1</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line">DigestUtils.shaHex(str);</span><br></pre></td></tr></table></figure>
+
+<p><strong>可逆算法</strong></p>
+<p><strong>常规加密解密算法：BASE64</strong></p>
+<p><strong>加密</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String str= <span class="string">"abc"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">byte</span>[] b = Base64.encodeBase64(str.getBytes(), <span class="keyword">true</span>);</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="keyword">new</span> String(b));</span><br></pre></td></tr></table></figure>
+
+<p><strong>解密</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">String str = <span class="string">"YWJj"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">byte</span>[] b = Base64.decodeBase64(str.getBytes());</span><br><span class="line"></span><br><span class="line">System.out.println(<span class="keyword">new</span> String(b));</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、创建配置类"><a href="#2、创建配置类" class="headerlink" title="2、创建配置类"></a>2、创建配置类</h3><p><strong>Config.java</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * url前半部分</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String BASE_URL = <span class="string">"https://api.miaodiyun.com/20150822"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 开发者注册后系统自动生成的账号，可在官网登录后查看</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String ACCOUNT_SID = <span class="string">"请填写自己的Sid"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 开发者注册后系统自动生成的TOKEN，可在官网登录后查看</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String AUTH_TOKEN = <span class="string">"请填写自己的token"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 响应数据类型, JSON或XML</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String RESP_DATA_TYPE = <span class="string">"json"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HttpUtil.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.woniuxy.three.pms.common.config;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.io.BufferedReader;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"><span class="keyword">import</span> java.io.InputStreamReader;</span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> java.net.URLConnection;</span><br><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.commons.codec.digest.DigestUtils;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * http请求工具</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HttpUtil</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 构造通用参数timestamp、sig和respDataType</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">createCommonParam</span><span class="params">()</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		<span class="comment">// 时间戳</span></span><br><span class="line">		SimpleDateFormat sdf = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyyMMddHHmmss"</span>);</span><br><span class="line">		String timestamp = sdf.format(<span class="keyword">new</span> Date());</span><br><span class="line"></span><br><span class="line">		<span class="comment">// 签名</span></span><br><span class="line">		String sig = DigestUtils.md5Hex(Config.ACCOUNT_SID + Config.AUTH_TOKEN + timestamp);</span><br><span class="line"></span><br><span class="line">		<span class="keyword">return</span> <span class="string">"&amp;timestamp="</span> + timestamp + <span class="string">"&amp;sig="</span> + sig + <span class="string">"&amp;respDataType="</span> + Config.RESP_DATA_TYPE;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * post请求</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">	 *            功能和操作</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> body</span></span><br><span class="line"><span class="comment">	 *            要post的数据</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@throws</span> IOException</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">post</span><span class="params">(String url, String body)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"url:"</span> + System.lineSeparator() + url);</span><br><span class="line">		System.out.println(<span class="string">"body:"</span> + System.lineSeparator() + body);</span><br><span class="line"></span><br><span class="line">		String result = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">try</span></span><br><span class="line">		&#123;</span><br><span class="line">			OutputStreamWriter out = <span class="keyword">null</span>;</span><br><span class="line">			BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">			URL realUrl = <span class="keyword">new</span> URL(url);</span><br><span class="line">			URLConnection conn = realUrl.openConnection();</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置连接参数</span></span><br><span class="line">			conn.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">			conn.setDoInput(<span class="keyword">true</span>);</span><br><span class="line">			conn.setConnectTimeout(<span class="number">5000</span>);</span><br><span class="line">			conn.setReadTimeout(<span class="number">20000</span>);</span><br><span class="line">			conn.setRequestProperty(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">			<span class="comment">// 提交数据</span></span><br><span class="line">			out = <span class="keyword">new</span> OutputStreamWriter(conn.getOutputStream(), <span class="string">"UTF-8"</span>);</span><br><span class="line">			out.write(body);</span><br><span class="line">			out.flush();</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 读取返回数据</span></span><br><span class="line">			in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(conn.getInputStream(), <span class="string">"UTF-8"</span>));</span><br><span class="line">			String line = <span class="string">""</span>;</span><br><span class="line">			<span class="keyword">boolean</span> firstLine = <span class="keyword">true</span>; <span class="comment">// 读第一行不加换行符</span></span><br><span class="line">			<span class="keyword">while</span> ((line = in.readLine()) != <span class="keyword">null</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (firstLine)</span><br><span class="line">				&#123;</span><br><span class="line">					firstLine = <span class="keyword">false</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					result += System.lineSeparator();</span><br><span class="line">				&#125;</span><br><span class="line">				result += line;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e)</span><br><span class="line">		&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 回调测试工具方法</span></span><br><span class="line"><span class="comment">	 * </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> url</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> reqStr</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">postHuiDiao</span><span class="params">(String url, String body)</span></span></span><br><span class="line"><span class="function">	</span>&#123;</span><br><span class="line">		String result = <span class="string">""</span>;</span><br><span class="line">		<span class="keyword">try</span></span><br><span class="line">		&#123;</span><br><span class="line">			OutputStreamWriter out = <span class="keyword">null</span>;</span><br><span class="line">			BufferedReader in = <span class="keyword">null</span>;</span><br><span class="line">			URL realUrl = <span class="keyword">new</span> URL(url);</span><br><span class="line">			URLConnection conn = realUrl.openConnection();</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 设置连接参数</span></span><br><span class="line">			conn.setDoOutput(<span class="keyword">true</span>);</span><br><span class="line">			conn.setDoInput(<span class="keyword">true</span>);</span><br><span class="line">			conn.setConnectTimeout(<span class="number">5000</span>);</span><br><span class="line">			conn.setReadTimeout(<span class="number">20000</span>);</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 提交数据</span></span><br><span class="line">			out = <span class="keyword">new</span> OutputStreamWriter(conn.getOutputStream(), <span class="string">"UTF-8"</span>);</span><br><span class="line">			out.write(body);</span><br><span class="line">			out.flush();</span><br><span class="line"></span><br><span class="line">			<span class="comment">// 读取返回数据</span></span><br><span class="line">			in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(conn.getInputStream(), <span class="string">"UTF-8"</span>));</span><br><span class="line">			String line = <span class="string">""</span>;</span><br><span class="line">			<span class="keyword">boolean</span> firstLine = <span class="keyword">true</span>; <span class="comment">// 读第一行不加换行符</span></span><br><span class="line">			<span class="keyword">while</span> ((line = in.readLine()) != <span class="keyword">null</span>)</span><br><span class="line">			&#123;</span><br><span class="line">				<span class="keyword">if</span> (firstLine)</span><br><span class="line">				&#123;</span><br><span class="line">					firstLine = <span class="keyword">false</span>;</span><br><span class="line">				&#125; <span class="keyword">else</span></span><br><span class="line">				&#123;</span><br><span class="line">					result += System.lineSeparator();</span><br><span class="line">				&#125;</span><br><span class="line">				result += line;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125; <span class="keyword">catch</span> (Exception e)</span><br><span class="line">		&#123;</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> result;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、编写测试类"><a href="#3、编写测试类" class="headerlink" title="3、编写测试类"></a>3、编写测试类</h3><p>SmsSender.java (设计一个接口，就一个方法，所以使用了注解@FunctionalInterface)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FunctionalInterface</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SmsSender</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 *  发送验证码  </span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> mobile 短信接收方</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> tempId 模板类型</span></span><br><span class="line"><span class="comment">	 * <span class="doctag">@param</span> params 参数  多个用英文逗号隔开</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendVercode</span><span class="params">(String mobile,String tempId,String params)</span></span>;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>MiaoDiSmsSender.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.woniuxy.three.pms.sms;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.woniuxy.three.pms.common.config.Config;</span><br><span class="line"><span class="keyword">import</span> com.woniuxy.three.pms.common.config.HttpUtil;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MiaoDiSmsSender</span> <span class="keyword">implements</span> <span class="title">SmsSender</span></span>&#123;</span><br><span class="line">    <span class="comment">//发送类型 industrySMS 是</span></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String operation = <span class="string">"/industrySMS/sendSMS"</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> <span class="keyword">static</span> String accountSid = Config.ACCOUNT_SID;</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sendVercode</span><span class="params">(String mobile, String tempId, String params)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">	    String url = Config.BASE_URL + operation;</span><br><span class="line">	    String body = <span class="string">"accountSid="</span> + accountSid + </span><br><span class="line">		    		  <span class="string">"&amp;to="</span> + mobile + </span><br><span class="line">		    		  <span class="string">"&amp;templateid="</span> + tempId +</span><br><span class="line">		    		  <span class="string">"&amp;param="</span> + params + </span><br><span class="line">		    		  HttpUtil.createCommonParam();</span><br><span class="line"></span><br><span class="line">	    <span class="comment">// 提交请求</span></span><br><span class="line">	    String result = HttpUtil.post(url, body);</span><br><span class="line">	    System.out.println(<span class="string">"result:"</span> + System.lineSeparator() + result);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SmsSender sender = <span class="keyword">new</span> MiaoDiSmsSender();</span><br><span class="line">		sender.sendVercode(<span class="string">"你的手机号"</span>, <span class="string">"模板ID"</span>, <span class="string">"参数1,参数2"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、扩展"><a href="#4、扩展" class="headerlink" title="4、扩展"></a>4、扩展</h3><hr>
+<p>使用HTTPRequest来监控IP</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> javax.servlet.http.HttpServletRequest;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 自定义访问对象工具类 </span></span><br><span class="line"><span class="comment"> *  </span></span><br><span class="line"><span class="comment"> * 获取对象的IP地址等信息 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> X-rapido </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CusAccessObjectUtil</span> </span>&#123;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 获取用户真实IP地址，不使用request.getRemoteAddr();的原因是有可能用户使用了代理软件方式避免真实IP地址, </span></span><br><span class="line"><span class="comment">*  </span></span><br><span class="line"><span class="comment">     * 可是，如果通过了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP值，究竟哪个才是真正的用户端的真实IP呢？ </span></span><br><span class="line"><span class="comment">     * 答案是取X-Forwarded-For中第一个非unknown的有效IP字符串。 </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * 如：X-Forwarded-For：192.168.1.110, 192.168.1.120, 192.168.1.130, </span></span><br><span class="line"><span class="comment">     * 192.168.1.100 </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * 用户真实IP为： 192.168.1.110 </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> request </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">getIpAddress</span><span class="params">(HttpServletRequest request)</span> </span>&#123;  </span><br><span class="line">        String ip = request.getHeader(<span class="string">"x-forwarded-for"</span>);  </span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;  </span><br><span class="line">            ip = request.getHeader(<span class="string">"Proxy-Client-IP"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;  </span><br><span class="line">            ip = request.getHeader(<span class="string">"WL-Proxy-Client-IP"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;  </span><br><span class="line">            ip = request.getHeader(<span class="string">"HTTP_CLIENT_IP"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;  </span><br><span class="line">            ip = request.getHeader(<span class="string">"HTTP_X_FORWARDED_FOR"</span>);  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">if</span> (ip == <span class="keyword">null</span> || ip.length() == <span class="number">0</span> || <span class="string">"unknown"</span>.equalsIgnoreCase(ip)) &#123;  </span><br><span class="line">            ip = request.getRemoteAddr();  </span><br><span class="line">        &#125;  </span><br><span class="line">        <span class="keyword">return</span> ip;  </span><br><span class="line">    &#125;  </span><br><span class="line">      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/20/短信接口/" data-id="cjx4a9bdo0001r0o3qf8fixl3" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMS/">SMS</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/20/hello-world/" class="article-date">
+  <time datetime="2019-06-20T05:29:54.161Z" itemprop="datePublished">2019-06-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/20/hello-world/">Hello World</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2019/06/20/hello-world/" data-id="cjx4a9bcy0000r0o3qi4sp11p" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMS/">SMS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/SMS/" style="font-size: 10px;">SMS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2019/06/20/短信接口/">短信接口</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/20/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
