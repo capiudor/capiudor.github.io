@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="Shiro,">
 
 
 
@@ -81,18 +81,20 @@
 
 
 
-<meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
-<meta name="keywords" content="capiudor,Capiudor">
+<meta name="description" content="shiro笔记 认证、授权、session管理、加密、 使用realm接口实现自定义realm LifecycleBeanPOSTProcessor可以自定的来调用配置在springioc容器中shiro bean的生命周期 启用IOC容器中使用shiro的注解、但必须在配置了LifecycleBeanPostProcessor之后才可以使用 配置一个shiroFilter ​    id必须和w">
+<meta name="keywords" content="Shiro">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2019/06/20/hello-world/index.html">
+<meta property="og:title" content="Shiro学习笔记">
+<meta property="og:url" content="http://yoursite.com/2019/06/06/shiro笔记/index.html">
 <meta property="og:site_name" content="Capiudor">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="shiro笔记 认证、授权、session管理、加密、 使用realm接口实现自定义realm LifecycleBeanPOSTProcessor可以自定的来调用配置在springioc容器中shiro bean的生命周期 启用IOC容器中使用shiro的注解、但必须在配置了LifecycleBeanPostProcessor之后才可以使用 配置一个shiroFilter ​    id必须和w">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-20T05:29:54.164Z">
+<meta property="og:image" content="http://yoursite.com/2019/06/06/shiro笔记/%5Cimgs%5Cstrategy.png">
+<meta property="og:updated_time" content="2019-07-01T11:32:07.330Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta name="twitter:title" content="Shiro学习笔记">
+<meta name="twitter:description" content="shiro笔记 认证、授权、session管理、加密、 使用realm接口实现自定义realm LifecycleBeanPOSTProcessor可以自定的来调用配置在springioc容器中shiro bean的生命周期 启用IOC容器中使用shiro的注解、但必须在配置了LifecycleBeanPostProcessor之后才可以使用 配置一个shiroFilter ​    id必须和w">
+<meta name="twitter:image" content="http://yoursite.com/2019/06/06/shiro笔记/%5Cimgs%5Cstrategy.png">
 
 
 
@@ -122,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/06/20/hello-world/">
+  <link rel="canonical" href="http://yoursite.com/2019/06/06/shiro笔记/">
 
 
 
 
 
-  <title>Hello World | Capiudor</title>
+  <title>Shiro学习笔记 | Capiudor</title>
   
 
 
@@ -318,7 +320,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/20/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/06/shiro笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Capiudor">
@@ -335,7 +337,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Hello World</h1>
+          <h1 class="post-title" itemprop="name headline">Shiro学习笔记</h1>
         
 
         <div class="post-meta">
@@ -347,8 +349,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-20T13:29:54+08:00">
-                2019-06-20
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-06T14:23:30+08:00">
+                2019-06-06
               </time>
             
 
@@ -365,7 +367,7 @@
 
           
           
-             <span id="/2019/06/20/hello-world/" class="leancloud_visitors" data-flag-title="Hello World">
+             <span id="/2019/06/06/shiro笔记/" class="leancloud_visitors" data-flag-title="Shiro学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -396,19 +398,99 @@
       
 
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h2 id="shiro笔记"><a href="#shiro笔记" class="headerlink" title="shiro笔记"></a>shiro笔记</h2><hr>
+<p>认证、授权、session管理、加密、</p>
+<p>使用realm接口实现自定义realm</p>
+<p>LifecycleBeanPOSTProcessor可以自定的来调用配置在springioc容器中shiro bean的生命周期</p>
+<p>启用IOC容器中使用shiro的注解、但必须在配置了LifecycleBeanPostProcessor之后才可以使用</p>
+<p>配置一个shiroFilter</p>
+<p>​    id必须和web.xml文件中的  DelegatingFilterProxy的<filter-name>一致</filter-name></p>
+<p>原因是：因为Shiro 会在IOC容器中查找和<filter-name>名字对应的filter bean</filter-name></p>
+<p>也可以使用  <init><param-name>targetBeanName</param-name></init></p>
+<p><param-value>IOC 容器中的beanName</param-value></p>
+<p>在property name=”filterhainDefinitions”中配置哪些页面需要受保护，</p>
+<p>以及访问这些页面需要的权限</p>
+<p>​    1、anon 可以被匿名访问</p>
+<p>​    2、authc 必须认证后才可能访问的页面。</p>
+<p>访问不成功会访问 loginUrl 属性配置的页面</p>
+<p>流程：</p>
+<p>​    发送请求   拦截器filterChainDefinitions拦截（如果没有配置则通过），然后 进行校验是否认证或者检查是否有权限访问</p>
+<p>URL 模式 使用Ant风格模式</p>
+<p>Ant路径通配符 ?、<em>、*</em>，注意通配符匹配不包括目录分隔符  “/”：</p>
+<p>URL权限采取第一次匹配优先的方式</p>
+<h2 id="验证流程"><a href="#验证流程" class="headerlink" title="验证流程"></a>验证流程</h2><hr>
+<ol>
+<li>获取当前的Subject .调用 SecurityUtils.getSubject();</li>
+<li>测试当前的用户是否已经被认证 . 即是否已经登录。 调用 Subject 的 isAuthenticated()</li>
+<li>若没有被认证，则把用户名和密码封装为 UsernamePasswordToken 对象<ol>
+<li>创建一个表单页面</li>
+<li>把请求提交到SpringMVC 的Handler</li>
+<li>获取用户名和密码。</li>
+</ol>
+</li>
+<li>执行登录：调用Subject 的 login(AuthenticationToken) 方法。</li>
+<li>自定义Realm 的方法，从数据库中获取对应的记录，返回给Shiro<ol>
+<li>实际上需要继承 org.apache.shiro.realm.AuthenticatingRealm 类</li>
+<li>实现doGetAuthenticationInfo(AuthenticationToken) 方法</li>
+</ol>
+</li>
+<li>由shiro 完成对密码的比对。</li>
+</ol>
+<p>为什么需要继承Authentication源码分析：</p>
+<p>​    Subject.login方法调用的是security的login方法执行authenticate(token) 进行认证，在authenticate()方法中调用authenticator.authenticate(token) 认证器，在这个方法调用了doAuthenticate(AuthenticationToken)，在这个方法中调用了一个或者多个Realm对象</p>
+<p><code>Collection&lt;Realm&gt; realms = getRealms();</code></p>
+<p>返回的是doSingleRealmAuthentication(realms.iterator.next(),authenticationToken);</p>
+<p>在这个doSingleRealmAuthentication方法中有一个调用 realm.getAuthenticationInfo(token);</p>
+<p>在getAuthenticationInfo中的info来自于doGetAuthenticationTokenInfo(token);</p>
+<h2 id="Shiro密码比对"><a href="#Shiro密码比对" class="headerlink" title="Shiro密码比对"></a>Shiro密码比对</h2><hr>
+<p>通过 AuthenticatingRealm 的 credentialsMatcher 属性进行的密码的比对！</p>
+<ol>
+<li>如何把一个字符串加密为MD5</li>
+<li>替换当前Realm 的credentialsMatcher属性。直接使用 HashedCredentialsMatcher对象，并设置加密算法即可</li>
+</ol>
+<p>为什么使用MD5 盐值加密：</p>
+<p>​    我们希望即使用户密码一样，也要保证加密后的密文不一样，我们选择单一的username进行盐值加密</p>
+<p>如何做到：</p>
+<pre><code>1. 在 doGetAuthenticationInfo() 方法返回值创建 SimpleAuthenticationInfo 对象的时候需要使用SimpleAuthenticationInfo(username,user.getPwd(),credentialsSalt,getName()) 构造器，
+ 2. 使用ByteSource.Util.bytes()来计算盐值
+ 3. 盐值需要唯一：
+      1. 一般使用随机字符串或user id
+ 4. 使用 new SimpleHash(&quot;MD5&quot;, &quot;1234&quot;, credentialsSalt, 1024);来计算盐值加密后的密码的值</code></pre><h2 id="多realm验证"><a href="#多realm验证" class="headerlink" title="多realm验证"></a>多realm验证</h2><hr>
+<p>场景：需要加密的信息存在多个数据库中</p>
+<p><strong>配置</strong></p>
+<p>单一的Reaml使用doSingleRealmAuthentication()方法</p>
+<p>多Realm的时候使用doMultiRealmAuthentication()方法，</p>
+<p>将多个Realm交给我们的ModularRealmAuthenticator（认证器）</p>
+<p>在securityManager中配置authenticator属性，将ModularRealmAuthenticator（认证器）注入</p>
+<p><strong>认证策略</strong></p>
+<p>默认使用</p>
+<p><img src="%5Cimgs%5Cstrategy.png" alt="验证当前策略的DeBug截图 strategy"></p>
+<p>策略AtLeastOneSuccessfulStrategy（有一个Realm认证通过即可，哪怕有一个Realm认证失败了）返回所有Realm身份认证成功的认证信息，</p>
+<p>策略AllSuccessfulStrategy（所有Realm验证成功才算成功，如果有一个失败就失败了。）且返回所有Realm身份验证成功的认证信息</p>
+<p>策略FirstSuccessfulStrategy（只要有一个Realm验证成功即可，只返回第一个Realm身份验证成功的认证信息，其他的忽略）</p>
+<p>可以在authenticator（认证器）中配置属性authenticationStrategy 配置策略：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 配置一个认证器 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"authenticator"</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.authc.pam.ModularRealmAuthenticator"</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 验证类 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"realms"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"customRealm"</span>/&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">ref</span> <span class="attr">bean</span>=<span class="string">"secondRealm"</span>/&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 认证策略 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"authenticationStrategy"</span> &gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">bean</span> <span class="attr">class</span>=<span class="string">"org.apache.shiro.authc.pam.AllSuccessfulStrategy"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="授权"><a href="#授权" class="headerlink" title="授权"></a>授权</h2><hr>
+<p>为什么在org.apache.shiro.web.mgt.DefaultWebSecurityManager （安全管理器）中使用realms属性而不在org.apache.shiro.authc.pam.ModularRealmAuthenticator（认证器）使用realms属性，</p>
+<p>因为在做授权的时候，我们需要从securityManager中读取realms，所以需要使用org.apache.shiro.web.mgt.DefaultWebSecurityManager 中的realms属性来配置</p>
+<p><strong>Shiro授权方式</strong></p>
+<p>编程式、注解式、JSP标签式</p>
+<p>授权的application.xml配置</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">bean class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" id="shiroFilter"&gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"securityManager"</span> <span class="attr">ref</span>=<span class="string">"securityManager"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"loginUrl"</span> <span class="attr">value</span>=<span class="string">"/login.html"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"successUrl"</span> <span class="attr">value</span>=<span class="string">"/index.html"</span>/&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 没有权限 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"unauthorizedUrl"</span> <span class="attr">value</span>=<span class="string">"/fail.html"</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"filterChainDefinitions"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">value</span>&gt;</span></span><br><span class="line">                /test/login = anon</span><br><span class="line">                /login.html = anon</span><br><span class="line">                /reg.html = anon</span><br><span class="line">                /user.html = roles[laowang]</span><br><span class="line">                /admin.html = roles[admin]</span><br><span class="line">                /logout = logout</span><br><span class="line">                /** = authc</span><br><span class="line">            <span class="tag">&lt;/<span class="name">value</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">property</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">bean</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+<ol>
+<li>授权需要继承AuthorizingRealm 类， 并实现其 抽象方法 doGetAuthorizationInfo</li>
+<li>AuthorizingRealm 类继承自 AuthenticatingRealm，但没有实现AuthenticatingRealm 中的 doGetAuthenticationInfo，所以认证her授权只需要继承AuthorizingRealm 就可以了，并同时实现它的两个抽象方法。</li>
+</ol>
+<p>授权时：在 SimplePrincipalCollection（PrincipalCollection的实现类） 将所有的登录用户的用户名放在一个LinkedHashSet中，也就是说我们通过PrincipalCollection的getPrimaryPrincipal方法能获取到用户的登录名，</p>
+<p>在多Realm的时候，获取getPrimaryPrincipal()的时候，跟我们的多Realm访问顺序返回的Principal是有关系的，因为我们在linkedHashSet中存放是有顺序的</p>
+<h2 id="权限注解"><a href="#权限注解" class="headerlink" title="权限注解"></a>权限注解</h2><hr>
+<p>@RequiresAuthentication：表示当前Subject已经通过login进行了身份验证；即 Subject.isAuthenticated()返回true</p>
+<p>@RequiresUser：表示当前Subject 已经身份验证或者通过记住我登陆的。</p>
+<p>@RequiresGuest：表示当前Subject没有身份验证或通过记住我登录过，即是游客身份。</p>
+<p>@RequiresRoles(value={“admin”,”user”},logical=Logical.AND)：表示当前Subject 需要角色 admin和user</p>
+<p>@RequiresPermissions(value={“user:a”,”user:b”},logical=Logical.OR):表示当前Subject需要权限user:a或user:b</p>
 
       
     </div>
@@ -424,6 +506,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/Shiro/" rel="tag"># Shiro</a>
+          
+        </div>
+      
 
       
       
@@ -433,18 +521,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/06/shiro笔记/" rel="next" title="Shiro学习笔记">
-                <i class="fa fa-chevron-left"></i> Shiro学习笔记
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/20/短信接口/" rel="prev" title="短信接口">
-                短信接口 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/20/hello-world/" rel="prev" title="Hello World">
+                Hello World <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -577,7 +661,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Quick-Start"><span class="nav-number">1.</span> <span class="nav-text">Quick Start</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Create-a-new-post"><span class="nav-number">1.1.</span> <span class="nav-text">Create a new post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Run-server"><span class="nav-number">1.2.</span> <span class="nav-text">Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generate-static-files"><span class="nav-number">1.3.</span> <span class="nav-text">Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deploy-to-remote-sites"><span class="nav-number">1.4.</span> <span class="nav-text">Deploy to remote sites</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#shiro笔记"><span class="nav-number">1.</span> <span class="nav-text">shiro笔记</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#验证流程"><span class="nav-number">2.</span> <span class="nav-text">验证流程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shiro密码比对"><span class="nav-number">3.</span> <span class="nav-text">Shiro密码比对</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多realm验证"><span class="nav-number">4.</span> <span class="nav-text">多realm验证</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#授权"><span class="nav-number">5.</span> <span class="nav-text">授权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权限注解"><span class="nav-number">6.</span> <span class="nav-text">权限注解</span></a></li></ol></div>
             
 
           </div>
