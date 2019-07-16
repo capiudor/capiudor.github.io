@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="springcloud,">
 
 
 
@@ -81,17 +81,18 @@
 
 
 
-<meta name="description" content="this is my blogs">
-<meta name="keywords" content="capiudor,Capiudor">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Capiudor">
-<meta property="og:url" content="http://yoursite.com/archives/index.html">
+<meta name="description" content="Eureka的工作原理 1、Eureka 简介 Eureka 是 Netflix 出品的用于实现微服务注册和发现的工具。 Spring Cloud 集成了 Eureka ，并提供了开箱即用的支持。其中，Eureka 又可以细分为 Eureka Server 和 Eureka Client。 1. 基本原理 服务启动后向 Eureka 注册，Eureka Server 会将注册信息向其他 Eurek">
+<meta name="keywords" content="springcloud">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Eureka">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/Eureka/index.html">
 <meta property="og:site_name" content="Capiudor">
-<meta property="og:description" content="this is my blogs">
+<meta property="og:description" content="Eureka的工作原理 1、Eureka 简介 Eureka 是 Netflix 出品的用于实现微服务注册和发现的工具。 Spring Cloud 集成了 Eureka ，并提供了开箱即用的支持。其中，Eureka 又可以细分为 Eureka Server 和 Eureka Client。 1. 基本原理 服务启动后向 Eureka 注册，Eureka Server 会将注册信息向其他 Eurek">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-16T11:17:20.081Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Capiudor">
-<meta name="twitter:description" content="this is my blogs">
+<meta name="twitter:title" content="Eureka">
+<meta name="twitter:description" content="Eureka的工作原理 1、Eureka 简介 Eureka 是 Netflix 出品的用于实现微服务注册和发现的工具。 Spring Cloud 集成了 Eureka ，并提供了开箱即用的支持。其中，Eureka 又可以细分为 Eureka Server 和 Eureka Client。 1. 基本原理 服务启动后向 Eureka 注册，Eureka Server 会将注册信息向其他 Eurek">
 
 
 
@@ -121,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/archives/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/Eureka/">
 
 
 
 
 
-  <title>归档 | Capiudor</title>
+  <title>Eureka | Capiudor</title>
   
 
 
@@ -156,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 	<a href="https://capiudor.github.io" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     
@@ -303,387 +304,186 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Eureka/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Capiudor">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/tom.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Capiudor">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Eureka</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T17:34:41+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 10 篇日志。 继续努力。
-      </span>
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2019">2019</h1>
-          </div>
-        
-        
+            
+          
 
-        
+          
+          
+             <span id="/2019/07/16/Eureka/" class="leancloud_visitors" data-flag-title="Eureka">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/16/Hystrix/" itemprop="url">
-              
-                <span itemprop="name">Hystrix</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-16T19:27:51+08:00" content="2019-07-16">
-          07-16
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/16/Eureka/" itemprop="url">
-              
-                <span itemprop="name">Eureka</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-16T17:34:41+08:00" content="2019-07-16">
-          07-16
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/11/GC/" itemprop="url">
-              
-                <span itemprop="name">GC</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-11T11:38:13+08:00" content="2019-07-11">
-          07-11
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h1 id="Eureka的工作原理"><a href="#Eureka的工作原理" class="headerlink" title="Eureka的工作原理"></a>Eureka的工作原理</h1><hr>
+<h3 id="1、Eureka-简介"><a href="#1、Eureka-简介" class="headerlink" title="1、Eureka 简介"></a>1、Eureka 简介</h3><hr>
+<p>Eureka 是 Netflix 出品的用于实现微服务注册和发现的工具。 Spring Cloud 集成了 Eureka ，并提供了开箱即用的支持。其中，Eureka 又可以细分为 Eureka Server 和 Eureka Client。</p>
+<h2 id="1-基本原理"><a href="#1-基本原理" class="headerlink" title="1. 基本原理"></a>1. 基本原理</h2><hr>
+<p>服务启动后向 Eureka 注册，Eureka Server 会将注册信息向其他 Eureka Server 进行同步，当服务消费者要调用服务提供者，则向服务注册中心获取服务提供者地址，然后会将服务提供者地址缓存在本地，下次再调用时，则直接从本地缓存中取，完成一次调用。</p>
+<p>当服务注册中心 Eureka Server 检测到服务提供者因为宕机、网络原因不可用时，则在服务注册中心将服务置为 DOWN 状态，并把当前服务提供者状态向订阅者发布，订阅过的服务消费者更新本地缓存。</p>
+<p>服务提供者在启动后，周期性（默认30秒）向 Eureka Server 发送心跳，以证明当前服务是可用状态。Eureka Server 在一定的时间（默认90秒）未收到客户端的心跳，则认为服务宕机，注销该实例。</p>
+<h2 id="2-Eureka-的自我保护机制"><a href="#2-Eureka-的自我保护机制" class="headerlink" title="2. Eureka 的自我保护机制"></a>2. Eureka 的自我保护机制</h2><hr>
+<p>在默认配置中，Eureka Server 在默认 90s 没有得到客户端的心跳，则注销该实例，但是往往因为微服务跨进程调用，网络通信往往会面临着各种问题，比如微服务状态正常，但是因为网络分区故障时，Eureka Server 注销服务实例则会让大部分微服务不可用，这很危险，因为服务明明没有问题。</p>
+<p>为了解决这个问题，Eureka 有自我保护机制，通过在 Eureka Server 配置如下参数，可启动保护机制（默认为开启）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">eureka.server.enable-self-preservation=true</span><br></pre></td></tr></table></figure>
 
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/08/Nginx/" itemprop="url">
-              
-                <span itemprop="name">未命名</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-08T11:24:34+08:00" content="2019-07-08">
-          07-08
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<p>它的原理是，当 Eureka Server 节点在短时间内丢失过多的客户端时（可能发送了网络故障），那么这个节点将会进入自我保护模式，不再注销任何微服务，当网络故障恢复后，该节点会自动退出自我保护模式。</p>
+<p>自我保护模式的架构哲学是 <em>宁可放过一个，绝不可错杀一千</em></p>
+<h2 id="3-作为服务注册中心，Eureka-比-Zookeeper-好在哪里"><a href="#3-作为服务注册中心，Eureka-比-Zookeeper-好在哪里" class="headerlink" title="3.作为服务注册中心，Eureka 比 Zookeeper 好在哪里"></a>3.作为服务注册中心，Eureka 比 Zookeeper 好在哪里</h2><hr>
+<p>注明的CAP理论指出，一个分布式系统不可能同时满足C(一致性)、A（可用性）和P（分区容错性）。由于分区容错性是在分布式系统中必须要保证的。因此我们只能在A和C之间进行权衡。在此 Zookeeper 保证的是CP ，而 Eureka 保证的是AP。</p>
+<h3 id="3-1-Zookeeper-保证CP"><a href="#3-1-Zookeeper-保证CP" class="headerlink" title="3.1  Zookeeper 保证CP"></a>3.1  Zookeeper 保证CP</h3><p>当向注册中心查询服务列表时，我们可以容忍注册中心返回的是几分钟以前的注册信息，但不能接受服务直接 DOWN 掉不可用。也就是说，服务注册功能对可用性的要求要高于一致性。但是Zookeeper会出现这样一种情况，当 master 节点因为网络故障与其他节点失去联系时，剩余节点会重新进行leader选举。问题在于，选举 leader 的时间太长，30 ~ 120 s，且选举期间整个Zookeeper集群都是不可用的，这就导致在选举期间注册服务瘫痪。在云部署的环境下，因网络问题使得 Zookeeper 集群失去 master 节点是较大概率会发生的事，虽然服务能够最终恢复，但是漫长的选举时间导致的注册长期不可用时不能容忍的。</p>
+<h3 id="3-2-Eureka-保证-AP"><a href="#3-2-Eureka-保证-AP" class="headerlink" title="3.2 Eureka 保证 AP"></a>3.2 Eureka 保证 AP</h3><p>Eureka在设计之初就已经考虑了这一点，优先保证可用性。Eureka 各个节点都是平等的，几个节点挂点都不会影响正常节点的工作，剩余的节点依然可以提供注册和查询服务。而 Eureka的客户端在向某个 Eureka 注册时如果发现连接失败，则会自动切换至其他节点，只要有一台 Eureka还在，就能保证注册服务可用（保证可用性），只不过查到的信息可能不是最新的（不保证强一致性）。除此之外，Eureka 还有一种自我保护机制，如果在 15 分钟内超过 85% 的节点都没有正常的心跳，那么 Eureka 就认为客户端与注册中心出现了网络故障，此时会出现以下几种情况：</p>
+<ol>
+<li>Eureka 不再从注册列表中移除因为长时间没收到心跳而应该过的服务；</li>
+<li>Eureka 仍然能够接受新服务的注册和查询请求，但是不会被同步到其他节点上（即保证当前节点依然可用）；</li>
+<li>当网络稳定时，当前实例新的注册信息会被同步到其他节点中。</li>
+</ol>
+<h2 id="4-总结"><a href="#4-总结" class="headerlink" title="4. 总结"></a>4. 总结</h2><hr>
+<p>Eureka 作为单纯的服务注册中心来说要比 Zookeeper 更加 “专业”，因为注册服务更重要的是可用性，我们可以接收短期内达不到一致性的情况。不过 Eureka 目前版本的实现是基于 Servlet 的 Java Web应用，它的权限性能肯定会收到影响。不过可以使用Spring Cloud Security 或者Shiro 来弥补这个。</p>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/07/01/Linux笔记/" itemprop="url">
-              
-                <span itemprop="name">Linux笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-01T19:43:01+08:00" content="2019-07-01">
-          07-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/29/Shiro踩坑/" itemprop="url">
-              
-                <span itemprop="name">Shiro</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-29T09:29:30+08:00" content="2019-06-29">
-          06-29
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/20/搭建共享单车项目框架/" itemprop="url">
-              
-                <span itemprop="name">搭建共享单车项目框架</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-20T23:16:21+08:00" content="2019-06-20">
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/20/SpringBoot整合Redis引发的血案/" itemprop="url">
-              
-                <span itemprop="name">SpringBoot整合Redis引发的血案</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-20T16:59:09+08:00" content="2019-06-20">
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/20/短信接口/" itemprop="url">
-              
-                <span itemprop="name">短信接口</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-20T14:23:30+08:00" content="2019-06-20">
-          06-20
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/06/06/shiro笔记/" itemprop="url">
-              
-                <span itemprop="name">Shiro学习笔记</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-06T14:23:30+08:00" content="2019-06-06">
-          06-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/springcloud/" rel="tag"># springcloud</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/11/GC/" rel="next" title="GC">
+                <i class="fa fa-chevron-left"></i> GC
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/16/Hystrix/" rel="prev" title="Hystrix">
+                Hystrix <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -691,6 +491,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -711,8 +515,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -772,6 +585,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka的工作原理"><span class="nav-number">1.</span> <span class="nav-text">Eureka的工作原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Eureka-简介"><span class="nav-number">1.0.1.</span> <span class="nav-text">1、Eureka 简介</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-基本原理"><span class="nav-number">1.1.</span> <span class="nav-text">1. 基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Eureka-的自我保护机制"><span class="nav-number">1.2.</span> <span class="nav-text">2. Eureka 的自我保护机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-作为服务注册中心，Eureka-比-Zookeeper-好在哪里"><span class="nav-number">1.3.</span> <span class="nav-text">3.作为服务注册中心，Eureka 比 Zookeeper 好在哪里</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Zookeeper-保证CP"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.1  Zookeeper 保证CP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Eureka-保证-AP"><span class="nav-number">1.3.2.</span> <span class="nav-text">3.2 Eureka 保证 AP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-总结"><span class="nav-number">1.4.</span> <span class="nav-text">4. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -925,6 +754,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
